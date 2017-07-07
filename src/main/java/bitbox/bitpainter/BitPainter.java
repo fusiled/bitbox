@@ -39,23 +39,7 @@ public final class BitPainter extends TitledPanel {
     }
 
     private void drawFigure() {
-        //Parse the string and build the image calling board.updateFigure method
-        String equationString = this.definition.getJTextField().getText();
-        CharStream is = CharStreams.fromString(equationString);
-        DrawGrammarLexer lex = new DrawGrammarLexer(is);
-        CommonTokenStream tokens = new CommonTokenStream(lex);
-        DrawGrammarParser parser = new DrawGrammarParser(tokens);
-        SortedMap<Integer, String> resultMap;
-        try {
-            resultMap = parser.root().map;
-        }
-        catch (RecognitionException | NullPointerException | StringIndexOutOfBoundsException | RasterFormatException re){
-            //Something wrong with the parsing do not update.
-            return;
-        }
-        if(resultMap!=null && resultMap.size()>0) {
-            this.board.updateFigure(resultMap);
-        }
+            this.board.updateFigure(this.definition.getJTextField().getText());
     }
 
 
