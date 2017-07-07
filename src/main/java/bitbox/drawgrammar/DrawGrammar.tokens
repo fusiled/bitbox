@@ -1,0 +1,15 @@
+NUMBER=1
+STRING=2
+STR_DELIM=3
+ELEM_SEP=4
+COMMA_SEP=5
+BR_OPEN=6
+BR_CLOSE=7
+RANGE_POINTS=8
+WS=9
+'"'=3
+':'=4
+','=5
+'['=6
+']'=7
+'..'=8
