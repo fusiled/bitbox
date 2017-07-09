@@ -23,7 +23,6 @@ rangeList returns [ SortedMap<Integer,String> map ]
         }
     | re=rangeElem COMMA_SEP rl=rangeList {
             for(int elem: $re.numSet){
-                System.out.println("put "+elem+","+$re.description);
                 $rl.map.put(elem,$re.description.replace("\"",""));
             }
             $map=$rl.map;

@@ -31,8 +31,8 @@ public class Main {
             fra.setLayout(new GridLayout(GRID_SIZE, GRID_SIZE));
             fra.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
             fra.add(baseConverter);
-            //fra.add(bitCombiner);
-            //fra.add(bitPainter);
+            fra.add(bitCombiner);
+            fra.add(bitPainter);
             fra.setVisible(true);
             log.fine("Created GUI");
         });
