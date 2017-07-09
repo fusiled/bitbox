@@ -2,9 +2,10 @@ package bitbox.bitcombiner;
 
 /**
  * Created by fusiled on 28/06/17.
- * @author fusiled <fusiled@gmail.com>
  *
- * Enum with all the operation allowed in OperationField JCOmboBoxes
+ * @author fusiled <fusiled@gmail.com>
+ *         <p>
+ *         Enum with all the operation allowed in OperationField JCOmboBoxes
  */
 public enum OperationEnum {
 
@@ -29,14 +30,13 @@ public enum OperationEnum {
 
 
     String visual_rep;
-    OperationEnum(String visual_rep)
-    {
-        this.visual_rep=visual_rep;
+
+    OperationEnum(String visual_rep) {
+        this.visual_rep = visual_rep;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.visual_rep;
     }
 }

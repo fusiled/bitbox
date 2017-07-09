@@ -1,16 +1,16 @@
 package bitbox.baseconverter;
 
-import javax.swing.*;
-
 /**
  * Created by fusiled on 02/07/17.
+ * @author fusiled <fusiled@gmail.com>
+ *     Interface for the BaseLogic, which is the class that produces a number representation in a specified base
  */
 public interface BaseLogicInterface {
 
 
-    public int getBase();
+    int getBase();
 
-    public Long getValue();
+    Long getValue();
 
-    public void setValue(Long value);
+    void setValue(Long value);
 }

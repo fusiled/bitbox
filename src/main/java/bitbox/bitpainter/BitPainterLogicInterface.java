@@ -9,9 +9,9 @@ import java.util.SortedMap;
 public interface BitPainterLogicInterface {
 
 
-    SortedMap<Integer,String> parseString(String fieldString);
+    SortedMap<Integer, String> parseString(String fieldString);
 
-    BufferedImage getImage(SortedMap<Integer,String> resultMap) throws MapIsNullException;
+    BufferedImage getImage(SortedMap<Integer, String> resultMap) throws MapIsNullException;
 
     BufferedImage parseAndGetImage(String fieldString) throws MapIsNullException;
 }

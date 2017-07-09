@@ -13,18 +13,17 @@ import org.antlr.v4.runtime.RecognitionException;
 public interface CombinerLogicInterface {
 
 
-    static int getResult(String equationString) throws LogicGrammarParsingException{
+    static int getResult(String equationString) throws LogicGrammarParsingException {
         CharStream is = CharStreams.fromString(equationString);
         LogicGrammarLexer lex = new LogicGrammarLexer(is);
         CommonTokenStream tokens = new CommonTokenStream(lex);
         LogicGrammarParser parser = new LogicGrammarParser(tokens);
-        System.out.println("Parsing equation: "+equationString);
+        System.out.println("Parsing equation: " + equationString);
         int final_result;
         try {
             final_result = parser.root().result;
-        }
-        catch (RecognitionException re){
-            throw  new LogicGrammarParsingException();
+        } catch (RecognitionException re) {
+            throw new LogicGrammarParsingException();
         }
         return final_result;
     }

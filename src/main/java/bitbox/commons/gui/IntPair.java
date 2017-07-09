@@ -5,12 +5,12 @@ package bitbox.commons.gui;
  */
 public class IntPair {
 
-private final int x;
-private final int y;
+    private final int x;
+    private final int y;
 
     public IntPair(int x, int y) {
-        this.x=x;
-        this.y=y;
+        this.x = x;
+        this.y = y;
     }
 
     public int getX() {

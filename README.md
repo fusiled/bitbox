@@ -26,7 +26,7 @@ other fields changing.
 
 **TODOs**:
 
-* Add the feature of adding custom bases.
+* Fix reset of the field. It can be annoying.
 
 ## BitCombiner
 

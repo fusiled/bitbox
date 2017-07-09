@@ -10,12 +10,12 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Main  {
+public class Main {
 
     private static final int GRID_SIZE = 3;
 
     public static void main(String[] args) {
-        Logger log=Logger.getGlobal();
+        Logger log = Logger.getGlobal();
         ConsoleHandler handler = new ConsoleHandler();
         handler.setLevel(Level.ALL);
         log.addHandler(handler);
@@ -26,13 +26,13 @@ public class Main  {
         BitCombiner bitCombiner = new BitCombiner();
         BitPainter bitPainter = new BitPainter();
         SwingUtilities.invokeLater(() -> {
-            fra.setSize(new Dimension(500,screenSize.height));
+            fra.setSize(new Dimension(500, screenSize.height));
             fra.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            fra.setLayout(new GridLayout(GRID_SIZE,GRID_SIZE));
+            fra.setLayout(new GridLayout(GRID_SIZE, GRID_SIZE));
             fra.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
             fra.add(baseConverter);
-            fra.add(bitCombiner);
-            fra.add(bitPainter);
+            //fra.add(bitCombiner);
+            //fra.add(bitPainter);
             fra.setVisible(true);
             log.fine("Created GUI");
         });

@@ -1,10 +1,9 @@
 package bitbox.commons.gui;
 
-import java.awt.Color;
-import java.util.ArrayList;
-
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Represents a palette, that is a sequence of colors.  A palette assigns
@@ -27,14 +26,11 @@ public class Palette implements Cloneable {
      * The colorType for a palette in which colors are specified as Hue/Saturation/Brightness values.
      */
     public final static int COLOR_TYPE_HSB = 1;
-
+    private final ChangeEvent changeEvent = new ChangeEvent(this);
     private int colorType;
     private boolean mirrorOutOfRangeComponents;
-
     private ArrayList<Double> divisionPoints;  // First element is always 0; last value is always 1
     private ArrayList<float[]> divisionPointColors; // Size is divisionPoints.size() + 1
-
-    private final ChangeEvent changeEvent = new ChangeEvent(this);
     private ArrayList<ChangeListener> changeListeners;
 
     /**
@@ -48,6 +44,7 @@ public class Palette implements Cloneable {
      * Create a palette of specified color type.  For HSB color type, the palette
      * is a rainbow spectrum.  For the RGB color type, the palette is a grayscale
      * from white to black.
+     *
      * @param colorType One of the constants Palette.COLOR_TYPE_HSB or Palette.COLOR_TYPE_RGB.
      * @throws IllegalArgumentException if the parameter is not one of the two valid color type constants.
      */
@@ -59,14 +56,12 @@ public class Palette implements Cloneable {
         divisionPoints.add(0.0);
         divisionPoints.add(1.0);
         if (colorType == COLOR_TYPE_HSB) { // spectrum
-            divisionPointColors.add(new float[] {0, 1, 1});
-            divisionPointColors.add(new float[] {1, 1, 1});
-        }
-        else if (colorType == COLOR_TYPE_RGB){ // grayscale
-            divisionPointColors.add(new float[] {1, 1, 1});
-            divisionPointColors.add(new float[] {0, 0, 0});
-        }
-        else
+            divisionPointColors.add(new float[]{0, 1, 1});
+            divisionPointColors.add(new float[]{1, 1, 1});
+        } else if (colorType == COLOR_TYPE_RGB) { // grayscale
+            divisionPointColors.add(new float[]{1, 1, 1});
+            divisionPointColors.add(new float[]{0, 0, 0});
+        } else
             throw new IllegalArgumentException("Palette color type must be TYPE_COLOR_RGB or TYPE_COLOR_HSB");
     }
 
@@ -80,44 +75,39 @@ public class Palette implements Cloneable {
 
     /**
      * Creates one of the built-in palettes used in the Mandelbrot program.
+     *
      * @param paletteName The name of the palette.  Must be one of "Spectrum",
-     * "PaleSpectrum", "Grayscale", "CyclicGrayscale", "CyclicRedCyan",
-     * "EarthSky", "HotCold", or "Fire".
+     *                    "PaleSpectrum", "Grayscale", "CyclicGrayscale", "CyclicRedCyan",
+     *                    "EarthSky", "HotCold", or "Fire".
      * @throws IllegalArgumentException if the parameter is not one of the valid
-     * built-in palette names.
+     *                                  built-in palette names.
      */
     public static Palette makeDefaultPalette(String paletteName) {
         Palette palette;
         if (paletteName.equals("Spectrum")) {
             palette = new Palette();
-        }
-        else if (paletteName.equals("PaleSpectrum")) {
+        } else if (paletteName.equals("PaleSpectrum")) {
             palette = new Palette();
             palette.setDivisionPointColorComponents(0, 0, 0.5f, 1);
             palette.setDivisionPointColorComponents(1, 1, 0.5f, 1);
-        }
-        else if (paletteName.equals("DarkSpectrum")) {
+        } else if (paletteName.equals("DarkSpectrum")) {
             palette = new Palette();
             palette.setDivisionPointColorComponents(0, 0, 1, 0.5f);
             palette.setDivisionPointColorComponents(1, 1, 1, 0.5f);
-        }
-        else if (paletteName.equals("Grayscale")) {
-            palette =new Palette(Palette.COLOR_TYPE_RGB);
-        }
-        else if (paletteName.equals("CyclicGrayscale")) {
+        } else if (paletteName.equals("Grayscale")) {
+            palette = new Palette(Palette.COLOR_TYPE_RGB);
+        } else if (paletteName.equals("CyclicGrayscale")) {
             palette = new Palette(Palette.COLOR_TYPE_RGB);
             palette.split(0.5);
             palette.setDivisionPointColorComponents(1, 0, 0, 0);
             palette.setDivisionPointColorComponents(2, 1, 1, 1);
-        }
-        else if (paletteName.equals("CyclicRedCyan")) {
+        } else if (paletteName.equals("CyclicRedCyan")) {
             palette = new Palette(Palette.COLOR_TYPE_RGB);
             palette.split(0.5);
             palette.setDivisionPointColorComponents(0, 1, 0, 0);
             palette.setDivisionPointColorComponents(1, 0, 1, 1);
             palette.setDivisionPointColorComponents(2, 1, 0, 0);
-        }
-        else if (paletteName.equals("EarthSky")) {
+        } else if (paletteName.equals("EarthSky")) {
             palette = new Palette(Palette.COLOR_TYPE_RGB);
             palette.split(0.15);
             palette.split(0.33);
@@ -129,8 +119,7 @@ public class Palette implements Cloneable {
             palette.setDivisionPointColorComponents(3, 0, 0, 0.6f);
             palette.setDivisionPointColorComponents(4, 0, 0.4f, 1);
             palette.setDivisionPointColorComponents(5, 1, 1, 1);
-        }
-        else if (paletteName.equals("HotCold")) {
+        } else if (paletteName.equals("HotCold")) {
             palette = new Palette(Palette.COLOR_TYPE_RGB);
             palette.split(0.16);
             palette.split(0.5);
@@ -140,8 +129,7 @@ public class Palette implements Cloneable {
             palette.setDivisionPointColorComponents(2, 0.2f, 0.2f, 0.2f);
             palette.setDivisionPointColorComponents(3, 1, 0, 0.8f);
             palette.setDivisionPointColorComponents(4, 1, 1, 1);
-        }
-        else if (paletteName.equals("Fire")) {
+        } else if (paletteName.equals("Fire")) {
             palette = new Palette(Palette.COLOR_TYPE_RGB);
             palette.split(0.17);
             palette.split(0.83);
@@ -149,8 +137,7 @@ public class Palette implements Cloneable {
             palette.setDivisionPointColorComponents(1, 1, 0, 0);
             palette.setDivisionPointColorComponents(2, 1, 1, 0);
             palette.setDivisionPointColorComponents(3, 1, 1, 1);
-        }
-        else
+        } else
             throw new IllegalArgumentException("Unknown palette: " + paletteName);
         return palette;
     }
@@ -158,7 +145,7 @@ public class Palette implements Cloneable {
     public boolean equals(Object obj) {
         if (obj == null || !(obj instanceof Palette))
             return false;
-        Palette that = (Palette)obj;
+        Palette that = (Palette) obj;
         if (that.colorType != colorType)
             return false;
         if (that.mirrorOutOfRangeComponents != mirrorOutOfRangeComponents)
@@ -191,6 +178,7 @@ public class Palette implements Cloneable {
     /**
      * Copies all properties from a specified palette, making this
      * palette equal to the specified palette.
+     *
      * @param that the palette whose properties are to be copied
      */
     public void copyFrom(Palette that) {
@@ -206,9 +194,10 @@ public class Palette implements Cloneable {
 
     /**
      * Removes a specified division point, one of the points where the color is specified explicitly.
+     *
      * @param divisionPointIndex the number of the division point to be removed, which much be
-     * in the range 1 through ct-2, where ct is the number of division points.  It is not possible
-     * to remove the first division point (which is 0.0) or the last division point (which is 1.0).
+     *                           in the range 1 through ct-2, where ct is the number of division points.  It is not possible
+     *                           to remove the first division point (which is 0.0) or the last division point (which is 1.0).
      */
     public void join(int divisionPointIndex) {
         if (divisionPointIndex <= 0 || divisionPointIndex >= divisionPoints.size() - 1)
@@ -221,11 +210,12 @@ public class Palette implements Cloneable {
     /**
      * Adds a division point to the palette.  The color associated to the point is obtained by
      * interpolating between the colors of the points that neighbor the new point.
+     *
      * @param divisionPoint The number between 0.0 and 1.0 where the new division point is to
-     * be added.  The value cannot be the same as an existing point.
+     *                      be added.  The value cannot be the same as an existing point.
      * @return The index of the new division point, this is, its position number in the list of division points.
      * @throws IllegalArgumentException if the parameter is less than 0.0 or greater than 1.0, or if
-     * a division point already exists at the specified value.
+     *                                  a division point already exists at the specified value.
      */
     public int split(double divisionPoint) {  // Return value is index of divisionPoint/color that are inserted, or -1 if exact number already exists as a divisionPoint
         if (divisionPoint <= 0 || divisionPoint >= 1 || Double.isNaN(divisionPoint))
@@ -235,14 +225,14 @@ public class Palette implements Cloneable {
             index++;
         if (Math.abs(divisionPoint - divisionPoints.get(index)) < 1e-15)
             return -1;
-        float ratio = (float)( (divisionPoint - divisionPoints.get(index-1))
-                / (divisionPoints.get(index) - divisionPoints.get(index-1)) );
-        float[] c1 = divisionPointColors.get(index-1);
+        float ratio = (float) ((divisionPoint - divisionPoints.get(index - 1))
+                / (divisionPoints.get(index) - divisionPoints.get(index - 1)));
+        float[] c1 = divisionPointColors.get(index - 1);
         float[] c2 = divisionPointColors.get(index);
-        float a = c1[0] + ratio*(c2[0] - c1[0]);
-        float b = c1[1] + ratio*(c2[1] - c1[1]);
-        float c = c1[2] + ratio*(c2[2] - c1[2]);
-        float[] color = new float[] { a, b, c };
+        float a = c1[0] + ratio * (c2[0] - c1[0]);
+        float b = c1[1] + ratio * (c2[1] - c1[1]);
+        float c = c1[2] + ratio * (c2[2] - c1[2]);
+        float[] color = new float[]{a, b, c};
         divisionPoints.add(index, divisionPoint);
         divisionPointColors.add(index, color);
         changed();
@@ -251,8 +241,9 @@ public class Palette implements Cloneable {
 
     /**
      * Get the color that this palette assigns to a specified number.
+     *
      * @param position the number between 0.0 and 1.0, inclusive, for which the corresponding
-     * color is to be returned.
+     *                 color is to be returned.
      * @throws IllegalArgumentException if the position is outside the range 0.0 to 1.0.
      */
     public Color getColor(double position) {
@@ -261,13 +252,13 @@ public class Palette implements Cloneable {
         int pt = 1;
         while (position > divisionPoints.get(pt))
             pt++;
-        float ratio = (float)( (position - divisionPoints.get(pt-1))
-                / (divisionPoints.get(pt) - divisionPoints.get(pt-1)) );
-        float[] c1 = divisionPointColors.get(pt-1);
+        float ratio = (float) ((position - divisionPoints.get(pt - 1))
+                / (divisionPoints.get(pt) - divisionPoints.get(pt - 1)));
+        float[] c1 = divisionPointColors.get(pt - 1);
         float[] c2 = divisionPointColors.get(pt);
-        float a = clamp1(c1[0] + ratio*(c2[0] - c1[0]));
-        float b = clamp2(c1[1] + ratio*(c2[1] - c1[1]));
-        float c = clamp2(c1[2] + ratio*(c2[2] - c1[2]));
+        float a = clamp1(c1[0] + ratio * (c2[0] - c1[0]));
+        float b = clamp2(c1[1] + ratio * (c2[1] - c1[1]));
+        float c = clamp2(c1[2] + ratio * (c2[2] - c1[2]));
         Color color;
         if (colorType == COLOR_TYPE_HSB)
             color = Color.getHSBColor(a, b, c);
@@ -279,29 +270,30 @@ public class Palette implements Cloneable {
     /**
      * Get an array of RGB color values corresponding to equally spaced points in the
      * range 0.0 to 1.0.
+     *
      * @param paletteLength The number of points for which colors will be returned.
-     * @param offset the color values are "rotated" by this amount within the array.
-     * That is, the color value corresponding to 0.0 is in the array at index = offset
-     * (or, more exactly, paletteLength % offset).
+     * @param offset        the color values are "rotated" by this amount within the array.
+     *                      That is, the color value corresponding to 0.0 is in the array at index = offset
+     *                      (or, more exactly, paletteLength % offset).
      */
     public int[] makeRGBs(int paletteLength, int offset) {
         int[] rgb;
         rgb = new int[paletteLength];
         rgb[offset % paletteLength] = getDivisionPointColor(0).getRGB();
         int ct = 1;
-        double dx = 1.0 / (paletteLength-1);
+        double dx = 1.0 / (paletteLength - 1);
         int pt = 1;
-        while (ct < paletteLength-1) {
-            double position = dx*ct;
+        while (ct < paletteLength - 1) {
+            double position = dx * ct;
             while (position > divisionPoints.get(pt))
                 pt++;
-            float ratio = (float)( (position - divisionPoints.get(pt-1))
-                    / (divisionPoints.get(pt) - divisionPoints.get(pt-1)) );
-            float[] c1 = divisionPointColors.get(pt-1);
+            float ratio = (float) ((position - divisionPoints.get(pt - 1))
+                    / (divisionPoints.get(pt) - divisionPoints.get(pt - 1)));
+            float[] c1 = divisionPointColors.get(pt - 1);
             float[] c2 = divisionPointColors.get(pt);
-            float a = clamp1(c1[0] + ratio*(c2[0] - c1[0]));
-            float b = clamp2(c1[1] + ratio*(c2[1] - c1[1]));
-            float c = clamp2(c1[2] + ratio*(c2[2] - c1[2]));
+            float a = clamp1(c1[0] + ratio * (c2[0] - c1[0]));
+            float b = clamp2(c1[1] + ratio * (c2[1] - c1[1]));
+            float c = clamp2(c1[2] + ratio * (c2[2] - c1[2]));
             Color color;
             if (colorType == COLOR_TYPE_HSB)
                 color = Color.getHSBColor(a, b, c);
@@ -310,7 +302,7 @@ public class Palette implements Cloneable {
             rgb[(ct + offset) % paletteLength] = color.getRGB();
             ct++;
         }
-        rgb[(offset + paletteLength-1) % paletteLength] = getDivisionPointColor(divisionPoints.size()-1).getRGB();
+        rgb[(offset + paletteLength - 1) % paletteLength] = getDivisionPointColor(divisionPoints.size() - 1).getRGB();
         return rgb;
     }
 
@@ -324,6 +316,7 @@ public class Palette implements Cloneable {
     /**
      * Returns a specified division points.  The return value is the range 0.0 to 1.0.  Divsion points
      * are stored in strictly increasing order.
+     *
      * @param index The index of the desired division point in the list of division points.
      */
     public double getDivisionPoint(int index) {
@@ -334,14 +327,15 @@ public class Palette implements Cloneable {
      * Sets the value of a specified division point.  Does not apply to the first or last points,
      * which always have values 0.0 and 1.0.  The new value must be strictly between the positions
      * the neighboring division points.
-     * @param index The index of the division point whose position is to be set.
+     *
+     * @param index    The index of the division point whose position is to be set.
      * @param position The new position for the specified division point.
      * @throws IllegalArgumentException if the index or position is not valid.
      */
     public void setDivisionPoint(int index, double position) {
         if (index <= 0 || index >= divisionPoints.size() - 1)
             throw new IllegalArgumentException("Index out of legal range");
-        if (position <= divisionPoints.get(index-1) || position >= divisionPoints.get(index+1))
+        if (position <= divisionPoints.get(index - 1) || position >= divisionPoints.get(index + 1))
             throw new IllegalArgumentException("Division point position outside of legal range.");
         if (position != divisionPoints.get(index)) {
             divisionPoints.set(index, position);
@@ -351,6 +345,7 @@ public class Palette implements Cloneable {
 
     /**
      * Get the color associated with a given division point.
+     *
      * @param index The index of the division point in the list of points.
      */
     public Color getDivisionPointColor(int index) {
@@ -359,9 +354,9 @@ public class Palette implements Cloneable {
         float b = clamp2(components[1]);
         float c = clamp2(components[2]);
         if (colorType == COLOR_TYPE_RGB)
-            return new Color(a,b,c);
+            return new Color(a, b, c);
         else
-            return Color.getHSBColor(a,b,c);
+            return Color.getHSBColor(a, b, c);
     }
 
     /**
@@ -380,10 +375,11 @@ public class Palette implements Cloneable {
      * interpolation, and then the resulting values are transformed into the range 0.0 to 1.0
      * just before the color is computed.  This means that the value can effectively oscillate
      * several times between two division points.
+     *
      * @param index
-     * @param c1 The Red color component for an RGB palette, or the Hue component for an HSB palette.
-     * @param c2 The Green color component for an RGB palette, or the Saturation component for an HSB palette.
-     * @param c3 The Blue color component for an RGB palette, or the Brightness component for an HSB palette.
+     * @param c1    The Red color component for an RGB palette, or the Hue component for an HSB palette.
+     * @param c2    The Green color component for an RGB palette, or the Saturation component for an HSB palette.
+     * @param c3    The Blue color component for an RGB palette, or the Brightness component for an HSB palette.
      */
     public void setDivisionPointColorComponents(int index, float c1, float c2, float c3) {
         float[] c = divisionPointColors.get(index);
@@ -450,15 +446,15 @@ public class Palette implements Cloneable {
 
     private float clamp1(float x) {
         if (colorType == COLOR_TYPE_HSB || !mirrorOutOfRangeComponents)
-            return x - (float)Math.floor(x);
+            return x - (float) Math.floor(x);
         else
             return clamp2(x);
     }
 
     private float clamp2(float x) {
         if (!mirrorOutOfRangeComponents)
-            return x - (float)Math.floor(x);
-        x = 2*(x/2 - (float)Math.floor(x/2));
+            return x - (float) Math.floor(x);
+        x = 2 * (x / 2 - (float) Math.floor(x / 2));
         if (x > 1)
             x = 2 - x;
         return x;
