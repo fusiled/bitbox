@@ -21,11 +21,12 @@ public class Main  {
         log.addHandler(handler);
         log.setLevel(Level.ALL);
         JFrame fra = new JFrame("bitbox");
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         BaseConverter baseConverter = new BaseConverter();
         BitCombiner bitCombiner = new BitCombiner();
         BitPainter bitPainter = new BitPainter();
         SwingUtilities.invokeLater(() -> {
-            fra.setSize(new Dimension(500,500));
+            fra.setSize(new Dimension(500,screenSize.height));
             fra.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             fra.setLayout(new GridLayout(GRID_SIZE,GRID_SIZE));
             fra.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);

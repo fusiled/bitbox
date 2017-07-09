@@ -3,14 +3,14 @@
 If you're tired of using different tools to make base conversions or 
 shift operations, then you can use **bitbox**!
 
-There are 2+1 tools available (BitPainter is under construction). 
+There are 3 tools available. 
 They're very simple tools without any comples logic, but they can be useful.
 
-The project is written in **Java** and the project can be built using **Maven**.
+The project is written in **Java 8** and the project can be built using **Maven**.
 
 # Download, Build & Run
 
-You must have `git`, `Java` and `Maven` installed.
+You must have `git`, `Java 8` and `Maven` installed.
 
 ```
 git clone https://github.com/fusiled/bitbox
@@ -39,10 +39,12 @@ possible to manipulate integer.
 * non-integer support
 * express numbers with bases (0x for hex, 0b for binary etc..)
 
-## BitPainter (UNDER DEVELOPMENT)
+## BitPainter
 
 Draw the image of a bit sequence. It is possible to add labels to the bits. You specify the layout with a comma-separated list of `[SET]"description"`. `SET` can be a `comma-separated list of integers` or an **inclusive** range `[min..MAX]` (both the minimum and the maximum are included).
 **TODOs**:
 
-* Interconnect labels and bits
+* No need to put empty string after a set.
+* Set title in grammar
+* ad dnote feature
 

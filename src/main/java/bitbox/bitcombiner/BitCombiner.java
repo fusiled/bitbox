@@ -69,7 +69,7 @@ public final class BitCombiner extends TitledPanel {
             //add buttons to the panel
             this.add(addLineButton, BorderLayout.EAST);
             this.add(removeLineButton, BorderLayout.WEST);
-            LOGGER.fine("BitCombiner panel instanciated successfully");
+            LOGGER.fine("BitCombiner panel instantiated successfully");
         });
     }
 
@@ -81,6 +81,7 @@ public final class BitCombiner extends TitledPanel {
     //Helper. It generates a new line and set all the related stuff (listeners)
     private OperationField instantiateOperationField() {
         OperationField newField = new OperationField();
+        newField.setMinimumSize(new Dimension(30,-1));
         newField.getJTextField().getDocument().addDocumentListener(new FieldListener());
         newField.getChooseBox().addActionListener(actionEvent -> updateResultField());
         return newField;

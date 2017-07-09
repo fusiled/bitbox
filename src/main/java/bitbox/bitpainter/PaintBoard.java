@@ -17,7 +17,10 @@ public class PaintBoard extends JPanel {
 
     public PaintBoard()
     {
+
         this.painterLogic=new PainterLogic();
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.setBackground(Color.WHITE);
     }
 
     @Override
@@ -34,5 +37,9 @@ public class PaintBoard extends JPanel {
         } catch (MapIsNullException e) {
             return;
         }
+    }
+
+    public BufferedImage getImage() {
+        return this.bImg;
     }
 }
