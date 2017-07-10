@@ -19,7 +19,9 @@ java -jar target/bitbox-1.0-SNAPSHOT.jar
 ``` 
 # Jar Download Link
 
-If you don't want to compile with Maven you can download the compiler jar at the following link: [https://drive.google.com/open?id=0B8vc7cpy6aOcYjQtLTl3VHlEMDg](https://drive.google.com/open?id=0B8vc7cpy6aOcYjQtLTl3VHlEMDg)
+If you don't want to compile with Maven you can download the compiler jar at the following link:
+
+[https://drive.google.com/open?id=0B8vc7cpy6aOcYjQtLTl3VHlEMDg](https://drive.google.com/open?id=0B8vc7cpy6aOcYjQtLTl3VHlEMDg)
 
 
 ## BaseConverter
@@ -45,6 +47,7 @@ possible to manipulate integer.
 ## BitPainter
 
 Draw the image of a bit sequence. It is possible to add labels to the bits. You specify the layout with a comma-separated list of `[SET]"description"`. `SET` can be a `comma-separated list of integers` or an **inclusive** range `[min..MAX]` (both the minimum and the maximum are included).
+
 **TODOs**:
 
 * No need to put empty string after a set.
