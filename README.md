@@ -17,6 +17,9 @@ git clone https://github.com/fusiled/bitbox
 cd bitbox mvn clean install
 java -jar target/bitbox-1.0-SNAPSHOT.jar
 ``` 
+# Jar Download Link
+
+If you don't want to compile with Maven you can download the compiler jar at the following link: [https://drive.google.com/open?id=0B8vc7cpy6aOcYjQtLTl3VHlEMDg](https://drive.google.com/open?id=0B8vc7cpy6aOcYjQtLTl3VHlEMDg)
 
 
 ## BaseConverter
