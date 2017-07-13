@@ -31,17 +31,20 @@ other fields changing.
 ## BitCombiner
 
 Just split operation in different fields. It's just a visual helper. The 
-result is computed with a parser built with Antlr. Now it is only  
-possible to manipulate integer. 
+result is computed with a parser built with Antlr. Operations are performed using *longs*.
+You can use the following bases:
 
-**TODOs**:
-
-* non-integer support
-* express numbers with bases (0x for hex, 0b for binary etc..)
+* decimal: `1234`
+* hexadecimal: `0xf3`
+* binary: `0b1001`
 
 ## BitPainter
 
-Draw the image of a bit sequence. It is possible to add labels to the bits. You specify the layout with a comma-separated list of `[SET]"description"`. `SET` can be a `comma-separated list of integers` or an **inclusive** range `[min..MAX]` (both the minimum and the maximum are included).
+Draw the image of a bit sequence. It is possible to add labels to the bits.
+You specify the layout with a comma-separated list of `[SET]"description"`.
+`SET` can be a `comma-separated list of integers` or an **inclusive** range `[min..MAX]` (both the minimum and the
+maximum are included).
+
 **TODOs**:
 
 * No need to put empty string after a set.

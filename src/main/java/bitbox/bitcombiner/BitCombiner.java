@@ -113,8 +113,8 @@ public final class BitCombiner extends TitledPanel {
         }
 
         try {
-            final int final_result = CombinerLogicInterface.getResult(stringBuilder.toString());
-            SwingUtilities.invokeLater(() -> setResult((long) final_result));
+            final long final_result = CombinerLogicInterface.getResult(stringBuilder.toString());
+            SwingUtilities.invokeLater(() -> setResult(final_result));
         } catch (LogicGrammarParsingException e) {
             LOGGER.fine("LogicGrammarParsingException. Result won't be updated");
         }
@@ -170,7 +170,6 @@ public final class BitCombiner extends TitledPanel {
         public void insertUpdate(DocumentEvent documentEvent) {
             updateResultField();
         }
-
         @Override
         public void removeUpdate(DocumentEvent documentEvent) {
             updateResultField();
